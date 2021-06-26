@@ -1,0 +1,26 @@
+---
+intents:
+  relationship:
+    action:
+      RelationshipAction
+    keywords:
+      - between
+      - relation
+      - relationship
+      - related
+  serve:
+    action:
+      ServeAction
+    keywords:
+      - serve
+      - served
+      - serving
+  friend:
+    action:
+      FollowAction
+    keywords:
+      - follows
+      - followed
+      - follow
+      - friend
+      - friends
