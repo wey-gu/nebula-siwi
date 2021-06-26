@@ -1,4 +1,4 @@
-# Siwi the vaoice assistant
+# Siwi the voice assistant
 
 Siwi (/ˈsɪwi/) is a PoC of Dialog System With Graph Database Backed Knowledge Graph.
 
