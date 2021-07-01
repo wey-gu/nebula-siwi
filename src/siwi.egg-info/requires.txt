@@ -1,5 +1,0 @@
-nebula2-python==2.0.0
-nba_api
-pyahocorasick
-pyyaml
-flask
