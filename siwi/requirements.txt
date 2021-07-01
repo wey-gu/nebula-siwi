@@ -1,2 +1,0 @@
-nba_api
-nebula2-python==2.0.0

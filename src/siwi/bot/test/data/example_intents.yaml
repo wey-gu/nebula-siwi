@@ -1,5 +1,9 @@
 ---
 intents:
+  fallback:
+    action:
+      FallbackAction
+    keywords: []
   relationship:
     action:
       RelationshipAction
@@ -8,6 +12,8 @@ intents:
       - relation
       - relationship
       - related
+      - connect
+      - correlate
   serve:
     action:
       ServeAction

@@ -1,3 +1,20 @@
+Metadata-Version: 2.1
+Name: siwi
+Version: 0.2
+Summary: A PoC of Dialog System With Graph Database Backed Knowledge Graph.
+Home-page: https://github.com/wey-gu/nebula-siwi
+Author: Wey Gu
+Author-email: weyl.gu@gmail.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/wey-gu/nebula-siwi/issues
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
 # Siwi the voice assistant
 
 Siwi (/ˈsɪwi/) is a PoC of Dialog System With Graph Database Backed Knowledge Graph.
@@ -65,3 +82,4 @@ TBD
 │                                                       │
 └───────────────────────────────────────────────────────┘
 ```
+

@@ -1,1 +1,7 @@
+# macOS
 .DS_Store
+
+# py
+*.pyc
+__pycache__
+dist/

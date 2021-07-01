@@ -3,7 +3,7 @@ from siwi.bot.classifier import SiwiClassifier
 
 
 class SiwiBot():
-    def __init__(self, connection_pool):
+    def __init__(self, connection_pool) -> None:
         self.classifier = SiwiClassifier()
         self.actions = SiwiActions()
         self.connection_pool = connection_pool
