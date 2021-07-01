@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "axios": "^0.21.1",
+    "vue-bot-ui": "^0.2.6",
+    "vue-web-speech": "^0.2.3"
+  }
+}
