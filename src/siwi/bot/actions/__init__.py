@@ -40,6 +40,7 @@ class SiwiActionBase():
         }
         """
         self.load_test_data()
+        self.error = False
 
     def load_test_data(self) -> None:
         module_path = f"{ siwi.__path__[0] }/bot/test/data"
@@ -74,6 +75,10 @@ class SiwiActionBase():
         else:
             print(f"[ERROR] Something went wrong, unknown vertex name { name }")
             raise
+
+    def _error_check(self):
+        if self.error:
+            return "Opps, something went wrong."
 
 
 class FallbackAction(SiwiActionBase):
@@ -123,9 +128,10 @@ class RelationshipAction(SiwiActionBase):
                 f"will fallback to FallbackAction, "
                 f"intent: { intent }"
                 )
-            return FallbackAction(intent)
+            self.error = True
 
     def execute(self, connection_pool) -> str:
+        self._error_check()
         query = (
             f'USE basketballplayer;'
             f'FIND NOLOOP PATH '
@@ -183,8 +189,10 @@ class ServeAction(SiwiActionBase):
                 f"will fallback to FallbackAction, "
                 f"intent: { intent }"
                 )
+            self.error = True
 
     def execute(self, connection_pool) -> str:
+        self._error_check()
         query = (
             f'USE basketballplayer;'
             f'MATCH p=(v)-[e:serve*1]->(v1) '
@@ -242,8 +250,10 @@ class FollowAction(SiwiActionBase):
                 f"will fallback to FallbackAction, "
                 f"intent: { intent }"
                 )
+            self.error = True
 
     def execute(self, connection_pool) -> str:
+        self._error_check()
         query = (
             f'USE basketballplayer;'
             f'MATCH p=(v)-[e:follow*1]->(v1) '

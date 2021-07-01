@@ -77,12 +77,12 @@ class SiwiClassifier():
         sentense:
         relation:
             - What is the relationship between Yao Ming and Lakers?
-            - How does Yao Ming and Lakers connected?
+            - How does Tracy McGrady and Lakers connected?
         serving:
-            - Which team had Yao Ming served?
+            - Which team had Jonathon Simmons served?
         friendship:
             - Whom does Tim Duncan follow?
-            - Who are Yao Ming's friends?
+            - Who are Tracy McGrady's friends?
 
         returns:
         {
