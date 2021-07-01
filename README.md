@@ -65,3 +65,18 @@ TBD
 │                                                       │
 └───────────────────────────────────────────────────────┘
 ```
+
+## Manually Run Components
+
+### Backend
+
+```bash
+# Install siwi backend
+python3 -m build
+
+# Configure Nebula Graph Endpoint
+export NG_ENDPOINTS=127.0.0.1:9669
+
+# Run Backend API server
+gunicorn --bind :5000 wsgi --workers 1 --threads 1 --timeout 60
+```
