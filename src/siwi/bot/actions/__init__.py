@@ -30,6 +30,7 @@ class SiwiActions():
         action = action_cls(intent)
         return action
 
+
 class SiwiActionBase():
     def __init__(self, intent: dict):
         """
@@ -72,7 +73,8 @@ class SiwiActionBase():
         elif name in self.teams:
             return self.teams[name]
         else:
-            print(f"[ERROR] Something went wrong, unknown vertex name { name }")
+            print(
+                f"[ERROR] Something went wrong, unknown vertex name { name }")
             raise
 
     def _error_check(self):
@@ -141,7 +143,7 @@ class RelationshipAction(SiwiActionBase):
 
         if not result.is_succeeded():
             return (
-                f"Something is wrong on Graph Database connection when querying "
+                f"Something is wrong on Graph Database connection when query "
                 f"{ query }"
                 )
 
@@ -152,7 +154,8 @@ class RelationshipAction(SiwiActionBase):
                 )
         path = result.row_values(0)[0].as_path()
         relationships = path.relationships()
-        relations_str = self._name(relationships[0].start_vertex_id().as_string())
+        relations_str = self._name(
+            relationships[0].start_vertex_id().as_string())
         for rel_index in range(path.length()):
             rel = relationships[rel_index]
             relations_str += (
@@ -168,7 +171,7 @@ class RelationshipAction(SiwiActionBase):
 class ServeAction(SiwiActionBase):
     """
     USE basketballplayer;
-    MATCH p=(v)-[e:serve*1]->(v1) 
+    MATCH p=(v)-[e:serve*1]->(v1)
     WHERE id(v) == "player133"
          RETURN p LIMIT 100
     """
@@ -202,7 +205,7 @@ class ServeAction(SiwiActionBase):
 
         if not result.is_succeeded():
             return (
-                f"Something is wrong on Graph Database connection when querying "
+                f"Something is wrong on Graph Database connection when query "
                 f"{ query }"
                 )
 
@@ -229,7 +232,7 @@ class ServeAction(SiwiActionBase):
 class FollowAction(SiwiActionBase):
     """
     USE basketballplayer;
-    MATCH p=(v)-[e:follow*1]->(v1) 
+    MATCH p=(v)-[e:follow*1]->(v1)
     WHERE id(v) == "player133"
          RETURN p LIMIT 100
     """
@@ -263,7 +266,7 @@ class FollowAction(SiwiActionBase):
 
         if not result.is_succeeded():
             return (
-                f"Something is wrong on Graph Database connection when querying "
+                f"Something is wrong on Graph Database connection when query "
                 f"{ query }"
                 )
 

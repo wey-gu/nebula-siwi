@@ -91,7 +91,6 @@ class SiwiClassifier():
         }
         """
         entities = self.get_matched_entities(sentence)
-        entity_types = set(entities.values())
         intents = self.get_matched_intents(sentence)
         return {
             "entities": entities,
