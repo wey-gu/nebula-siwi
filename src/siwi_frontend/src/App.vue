@@ -150,6 +150,6 @@ export default {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), 0 1px 4px 0 rgba(0,0,0,0.19);
 }
 </style>
