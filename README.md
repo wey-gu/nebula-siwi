@@ -200,6 +200,7 @@ Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src
 ## Further work
 
 - [ ] Use [NBA-API](https://github.com/swar/nba_api) to fallback undefined pattern questions
+- [ ] Wrap and manage sessions instead of get and release session per request, this is somehow costly actually.
 - [ ] Use NLP methods to implement proper Symentic Parsing, Intent Matching, Slot Filling
 - [ ] Build Graph to help with Intent Matching, especially for a general purpose bot
 - [ ] Use larger Dataset i.e. from [wyattowalsh/basketball](wyattowalsh/basketball)

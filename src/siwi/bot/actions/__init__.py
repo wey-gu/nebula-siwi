@@ -106,13 +106,9 @@ friendship:
 
 class RelationshipAction(SiwiActionBase):
     """
-    # with connection_pool.session_context("root", "nebula") as session:
-    #     query = (
-    #         f'USE basketballplayer;'
-    #         f'FIND NOLOOP PATH '
-    #         f'FROM "player100" TO "team204" OVER * BIDIRECT UPTO 4 STEPS;'
-    #         )
-    #     result = session.execute(query)
+    USE basketballplayer;
+    FIND NOLOOP PATH
+    FROM "player100" TO "team204" OVER * BIDIRECT UPTO 4 STEPS;
     """
     def __init__(self, intent):
         print(f"[DEBUG] RelationshipAction intent: { intent }")
