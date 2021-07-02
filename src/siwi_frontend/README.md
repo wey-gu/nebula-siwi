@@ -4,7 +4,7 @@
 
 ## Build Manually
 
-Vue-cli service global was used for ease of debug(for a non-webpack enginner).
+Vue-cli service global was used for ease of debug(for a non-webpack engineer).
 
 ```bash
 npm install -g @vue/cli-service-global

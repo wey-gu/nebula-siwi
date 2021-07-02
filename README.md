@@ -2,11 +2,16 @@
 
 Siwi (/ˈsɪwi/) is a PoC of Dialog System With Graph Database Backed Knowledge Graph.
 
-It's a demo for task-driven(not general purpose) dialog bots with KG(Knowledge Graph) leveraging Nebula Graph with the minimal dataset from https://playground.nebula-graph.com.cn .
+For now, it's a demo for task-driven(not general purpose) dialog bots with KG(Knowledge Graph) leveraging Nebula Graph with the minimal/sample dataset from [Nebula Graph Manual](https://docs.nebula-graph.io/2.0.1/3.ngql-guide/1.nGQL-overview/1.overview/#basketballplayer)/ [NG中文手册](https://docs.nebula-graph.com.cn/2.0.1/3.ngql-guide/1.nGQL-overview/1.overview/#basketballplayer).
+
+> Tips: Now you can play with the graph online without installing yourself!
+>
+> [Nebula Playground](https://playground.nebula-graph.io) | [Nebula Playground - China Mainland](https://playground.nebula-graph.com.cn)
 
 Supported queries:
 
 `relation`:
+
 - What is the relationship between Yao Ming and Lakers?
 - How does Yao Ming and Lakers connected?
 
@@ -19,7 +24,7 @@ Supported queries:
 
 ## Deploy and Try
 
-TBD leveraging docker and nebula-up
+TBD (leveraging docker and nebula-up)
 
 ## How does it work?
 
@@ -197,6 +202,7 @@ Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src
 - [ ] Use [NBA-API](https://github.com/swar/nba_api) to fallback undefined pattern questions
 - [ ] Use NLP methods to implement proper Symentic Parsing, Intent Matching, Slot Filling
 - [ ] Build Graph to help with Intent Matching, especially for a general purpose bot
+- [ ] Use larger Dataset i.e. from [wyattowalsh/basketball](wyattowalsh/basketball)
 
 
 
