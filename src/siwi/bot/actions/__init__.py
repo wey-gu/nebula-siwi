@@ -58,7 +58,6 @@ class SiwiActionBase():
             value: key for (key, value) in self.teams.items()
             }
 
-
     def _name(self, vid: str) -> str:
         if vid.startswith("player"):
             return self.player_names.get(vid, "unknown player")

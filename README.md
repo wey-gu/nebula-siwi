@@ -211,6 +211,9 @@ Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src
 ### Backend
 
 - I learnt a lot from the [KGQA on MedicalKG](https://github.com/liuhuanyong/QASystemOnMedicalKG) from [Huanyong Liu](https://liuhuanyong.github.io)
+- [Flask](https://github.com/pallets/flask)
+- [pyahocorasick](https://github.com/WojciechMula/pyahocorasick) from [Wojciech Muła](http://0x80.pl/)
+- [PyYaml](https://pyyaml.org/)
 
 ### Frontend
 
