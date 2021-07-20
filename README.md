@@ -203,7 +203,7 @@ Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src
 - [ ] Wrap and manage sessions instead of get and release session per request, this is somehow costly actually.
 - [ ] Use NLP methods to implement proper Symentic Parsing, Intent Matching, Slot Filling
 - [ ] Build Graph to help with Intent Matching, especially for a general purpose bot
-- [ ] Use larger Dataset i.e. from [wyattowalsh/basketball](wyattowalsh/basketball)
+- [ ] Use larger Dataset i.e. from [wyattowalsh/basketball](https://www.kaggle.com/wyattowalsh/basketball)
 
 
 
@@ -211,14 +211,14 @@ Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src
 
 ### Backend
 
-- I learnt a lot from the [KGQA on MedicalKG](https://github.com/liuhuanyong/QASystemOnMedicalKG) from [Huanyong Liu](https://liuhuanyong.github.io)
+- I learnt a lot from the [KGQA on MedicalKG](https://github.com/liuhuanyong/QASystemOnMedicalKG) created by [Huanyong Liu](https://liuhuanyong.github.io)
 - [Flask](https://github.com/pallets/flask)
-- [pyahocorasick](https://github.com/WojciechMula/pyahocorasick) from [Wojciech Muła](http://0x80.pl/)
+- [pyahocorasick](https://github.com/WojciechMula/pyahocorasick) created by [Wojciech Muła](http://0x80.pl/)
 - [PyYaml](https://pyyaml.org/)
 
 ### Frontend
 
-- [VueJS](vuejs.org) for frontend framework
+- [VueJS](https://vuejs.org) for frontend framework
 - [Vue Bot UI](https://github.com/juzser/vue-bot-ui ), as a lovely bot UI in vue
 - [Vue Web Speech](https://github.com/Drackokacka/vue-web-speech ), for speech API vue wrapper
 - [Axios](https://github.com/axios/axios ) for browser http client
