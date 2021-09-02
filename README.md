@@ -137,6 +137,13 @@ export NG_ENDPOINTS=127.0.0.1:9669
 gunicorn --bind :5000 wsgi --workers 1 --threads 1 --timeout 60
 ```
 
+> For OpenFunction/ KNative
+
+```bash
+docker build -t weygu/siwi-api .
+docker run -it --name test --env=PORT=5000 --env=NG_ENDPOINTS=192.168.8.137:32669 -p 15000:5000  weygu/siwi-api
+```
+
 Try it out Web API:
 ```bash
 $ curl --header "Content-Type: application/json" \
