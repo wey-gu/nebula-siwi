@@ -219,8 +219,8 @@ class ServeAction(SiwiActionBase):
             rel = result.row_values(index)[0].as_path().relationships()[0]
             serving_teams_str += (
                 f"{ self._name(rel.end_vertex_id().as_string()) } "
-                f"from { rel.propertys()['start_year'] } "
-                f"to { rel.propertys()['start_year'] }; "
+                f"from { rel.properties()['start_year'] } "
+                f"to { rel.properties()['start_year'] }; "
                 )
         return (
             f"{ self.player0 } had served { result.row_size() } team"
@@ -280,7 +280,7 @@ class FollowAction(SiwiActionBase):
             rel = result.row_values(index)[0].as_path().relationships()[0]
             following_players_str += (
                 f"{ self._name(rel.end_vertex_id().as_string()) } "
-                f"in degree { rel.propertys()['degree'] }; "
+                f"in degree { rel.properties()['degree'] }; "
                 )
         return (
             f"{ self.player0 } had followed { result.row_size() } player"
