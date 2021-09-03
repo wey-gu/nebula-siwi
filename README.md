@@ -141,7 +141,11 @@ gunicorn --bind :5000 wsgi --workers 1 --threads 1 --timeout 60
 
 ```bash
 docker build -t weygu/siwi-api .
-docker run -it --name test --env=PORT=5000 --env=NG_ENDPOINTS=192.168.8.137:32669 -p 15000:5000  weygu/siwi-api
+docker run --rm --name siwi-api \
+     --env=PORT=5000 \
+     --env=NG_ENDPOINTS=127.0.0.1:9669 \
+     --net=host \
+     weygu/siwi-api
 ```
 
 Try it out Web API:
