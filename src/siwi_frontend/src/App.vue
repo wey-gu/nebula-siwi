@@ -40,7 +40,8 @@ export default {
   },
   data () {
     return {
-      apiEndpoint: "http://localhost:8081/query",
+      // apiEndpoint: "http://localhost:8081/query",
+      apiEndpoint: "/query",
       record: false,
       results: null,
       voiceList: [],
