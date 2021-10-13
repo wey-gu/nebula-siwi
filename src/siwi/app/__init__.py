@@ -17,7 +17,7 @@ def root():
 @app.route("/query", methods=["POST"])
 def query():
     request_data = request.get_json()
-    question = ("question", "")
+    question = request_data.get("question", "")
     if question:
         answer = siwi_bot.query(request_data.get("question", ""))
     else:
