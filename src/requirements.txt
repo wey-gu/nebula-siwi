@@ -1,0 +1,5 @@
+nebula2-python==2.0.0
+Flask
+pyahocorasick
+pyyaml
+gunicorn
