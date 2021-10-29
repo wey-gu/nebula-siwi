@@ -1,3 +1,5 @@
+import os
+
 from nebula2.gclient.net import ConnectionPool
 from nebula2.Config import Config
 from siwi.app import parse_nebula_graphd_endpoint
