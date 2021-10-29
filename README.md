@@ -208,6 +208,203 @@ Out[4]: 'Jonathon Simmons had served 3 teams. Spurs from 2015 to 2015; 76ers fro
 
 Referring to [siwi_frontend](https://github.com/wey-gu/nebula-siwi/tree/main/src/siwi_frontend)
 
+
+
+## Deploy with K8s + OpenFunction
+
+
+
+```asciiarmor
+ ┌─────────────────────────────┐
+ │ kind: Ingress               │     ┌───────────────────┐
+ │   path: /                   │     │ Pod               │
+ │    -> siwi-frontend     ────┼─────┤  siwi-frontend    │
+ │                             │     │                   │
+ │                             │     └───────────────────┘
+ │                             │
+ │   path: /query              │     ┌───────────────────────────────────┐
+ │    -> siwi-api          ────┼─────┤ KNative Service                   │
+ │       KNative Serving       │     │  serving-xxxx                     │
+ │                             │     │                                   │
+ │                             │     │ apiVersion: serving.knative.dev/v1│
+ │                             │     │ kind: Service                     │
+ └─────────────────────────────┘     └─────────┬─────────────────────────┘
+                                               │
+                                               └────────────┐
+                                                            │
+ ┌───────────────────────────────────────────────────────┐  │
+ │apiVersion: core.openfunction.io/v1alpha1              │  │
+ │kind: Function                                         │  │
+ │spec:                                                  │  │
+ │  version: "v1.0.0"                                    │  │
+ │  image: "weygu/siwi-api:latest"                       │  │
+ │  imageCredentials:                                    │  │
+ │    name: push-secret                                  │  │
+ │  port: 8080                                           │  │
+ │  build:                                               │  │
+ │    builder: openfunction/builder:v1                   │  │
+ │    env:                                               │  │
+ │      FUNC_NAME: "siwi_api"                            │  │
+ │      FUNC_TYPE: "http"                                │  │
+ │      FUNC_SRC: "main.py"                              │  │
+ │    srcRepo:                                           │  │
+ │      url: "https://github.com/wey-gu/nebula-siwi.git" │  │
+ │      sourceSubPath: "src"                             │  │
+ │  serving:                                             │  │
+ │    runtime: Knative  ─────────────────────────────────┼──┘
+ │    params:                                            │
+ │      NG_ENDPOINTS: "NEBULA_GRAPH_ENDPOINT"            │
+ │    template:                          │               │
+ │      containers:                      │               │
+ │        - name: function               │               │
+ │          imagePullPolicy: Always      │               │
+ └───────────────────────────────────────┼───────────────┘
+                                         │
+                              ┌──────────┘
+                              │
+ ┌────────────────────────────┴───────────────────────────┐
+ │apiVersion:lapps.nebula-graph.io/v1alpha1               │
+ │kind: NebulaCluster                                     │
+ │spec:                                                   │
+ │  graphd:                                               │
+ │    config:                                             │
+ │      system_memory_high_watermark_ratio: "1.0"         │
+ │    image: vesoft/nebula-graphd                         │
+ │    replicas: 1                                         │
+ │...                                                     │
+ └────────────────────────────────────────────────────────┘
+```
+
+> Assumed we have a k8s with OpenFunctions installed
+
+### Run it!
+
+Install a Nebula Graph with `kubesphere-all-in-one` nebula installer on KubeSphere:
+
+```bash
+curl -sL nebula-kind.siwei.io/install-ks-1.sh | bash
+```
+
+Get Nebula Graph NodePort:
+
+```bash
+NEBULA_GRAPH_ENDPOINT=$(kubectl get svc nebula-graphd-svc-nodeport -o yaml -o jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
+echo $NEBULA_GRAPH_ENDPOINT
+```
+
+Load Dataset into the nebula cluster:
+
+```bash
+wget https://docs.nebula-graph.io/2.0/basketballplayer-2.X.ngql
+
+~/.nebula-kind/bin/console -u root -p password --address=<nebula-graphd-svc-nodeport> --port=32669 -f basketballplayer-2.X.ngql
+```
+
+Create the siwi-api powered by Openfunction:
+
+```bash
+cat siwi-api-function.yaml | sed "s/NEBULA_GRAPH_ENDPOINT/$NEBULA_GRAPH_ENDPOINT/g" | kubectl apply -f -
+```
+
+Get the function nebula-siwi and the KNative Service:
+
+```bash
+kubectl get functions nebula-siwi
+
+FUNCTION=$(kubectl get functions nebula-siwi -o go-template='{{.status.serving.resourceRef}}')
+
+kubectl get ksvc -l openfunction.io/serving=$FUNCTION
+
+KSVC=$(kubectl get ksvc -l openfunction.io/serving=$FUNCTION -o=jsonpath='{.items[0].metadata.name}')
+
+kubectl get revision -l serving.knative.dev/service=$KSVC
+
+REVISION=$(kubectl get revision -l serving.knative.dev/service=$KSVC -o=jsonpath='{.items[0].metadata.name}')
+
+echo $REVISION
+```
+
+Verify the function worked fine:
+
+```bash
+curl --header "Content-Type: application/json" \
+     --request POST \
+     --data '{"question": "What is the relationship between Yao Ming and Lakers ?"}' \
+     $(kubectl get ksvc -l openfunction.io/serving=$FUNCTION -o=jsonpath='{.items[0].status.url}')/query
+```
+
+Create the siwi-app resources on K8s:
+
+```bash
+cat siwi-app.yaml | sed "s/REVISION/$REVISION/g" | kubectl apply -f -
+```
+
+Verify the function worked fine through the ingress:
+
+> Here nodeport with http port 31059 was used as ingress controller endpoint.
+
+```bash
+curl --header "Content-Type: application/json" \
+     --request POST \
+     --data '{"question": "how does Tim Duncan and Lakers connected?"}' \
+     demo-siwi.local:31059/query
+```
+
+Verify the frontend:
+
+```bash
+curl $(kubectl get svc -l app=siwi -o=jsonpath='{.items[0].spec.clusterIP}')
+```
+
+Verify the frontend beind the ingress:
+
+```bash
+curl demo-siwi.local:31059
+```
+
+Get all resources in siwi-app:
+
+```bash
+kubectl get service,pod,ingress,function -l app=siwi
+```
+
+And it should be something like this:
+```bash
+[root@wey nebula-siwi]# kubectl get service,pod,ingress,function -l app=siwi
+NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/siwi-frontend-file   ClusterIP   10.233.60.81   <none>        80/TCP    64m
+
+NAME                     READY   STATUS    RESTARTS   AGE
+pod/siwi-frontend-file   1/1     Running   0          64m
+
+NAME                                     CLASS    HOSTS             ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/siwi-service   <none>   demo-siwi.local             80      59m
+
+NAME                                        BUILDSTATE   SERVINGSTATE   BUILDER         SERVING         AGE
+function.core.openfunction.io/nebula-siwi   Succeeded    Running        builder-sbfz6   serving-vvjvl   26h
+[root@wey nebula-siwi]# kubectl get service,pod,ingress,function -l app=siwi
+NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/siwi-frontend-file   ClusterIP   10.233.60.81   <none>        80/TCP    65m
+
+NAME                     READY   STATUS    RESTARTS   AGE
+pod/siwi-frontend-file   1/1     Running   0          65m
+
+NAME                                     CLASS    HOSTS             ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/siwi-service   <none>   demo-siwi.local             80      59m
+
+NAME                                        BUILDSTATE   SERVINGSTATE   BUILDER         SERVING         AGE
+function.core.openfunction.io/nebula-siwi   Succeeded    Running        builder-sbfz6   serving-vvjvl   26h
+```
+
+### How to Build the image
+
+```bash
+docker build -t weygu/siwi-frontend . -f Dockerfile.froentend
+docker push weygu/siwi-frontend
+```
+
+
+
 ## Further work
 
 - [ ] Use [NBA-API](https://github.com/swar/nba_api) to fallback undefined pattern questions

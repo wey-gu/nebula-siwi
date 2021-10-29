@@ -1,0 +1,29 @@
+apiVersion: core.openfunction.io/v1alpha1
+kind: Function
+metadata:
+  name: nebula-siwi
+  labels:
+    app: siwi
+spec:
+  version: "v1.0.0"
+  image: "weygu/siwi-api:latest"
+  imageCredentials:
+    name: push-secret
+  port: 8080
+  build:
+    builder: openfunction/builder:v1
+    env:
+      FUNC_NAME: "siwi_api"
+      FUNC_TYPE: "http"
+      FUNC_SRC: "main.py"
+    srcRepo:
+      url: "https://github.com/wey-gu/nebula-siwi.git"
+      sourceSubPath: "src"
+  serving:
+    runtime: Knative
+    params:
+      NG_ENDPOINTS: "NEBULA_GRAPH_ENDPOINT"
+    template:
+      containers:
+        - name: function
+          imagePullPolicy: Always

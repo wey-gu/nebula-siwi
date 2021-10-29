@@ -1,0 +1,56 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: siwi-frontend-file
+  labels:
+    app: siwi
+spec:
+  containers:
+    - name: siwi-frontend-file
+      image: weygu/siwi-frontend:latest
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: siwi-frontend-file
+  labels:
+    app: siwi
+spec:
+  selector:
+    app: siwi
+  ports:
+    - port: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: siwi-service
+  labels:
+    app: siwi
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: "demo-siwi.local"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/query"
+        backend:
+          service:
+            name: REVISION-private
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: siwi-frontend-file
+            port:
+              number: 80

@@ -1,0 +1,2 @@
+FROM nginx
+COPY src/siwi_frontend/dist/ /usr/share/nginx/html
