@@ -22,4 +22,4 @@ def siwi_api(request):
         answer = siwi_bot.query(request_data.get("question", ""))
     else:
         answer = "Sorry, what did you say?"
-    return jsonify({"answer": answer})
+    return {"answer": answer}
