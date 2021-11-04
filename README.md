@@ -24,7 +24,7 @@ Supported queries:
 
 ## Deploy and Try
 
-TBD (leveraging docker and nebula-up)
+You can try with it from scratch here: https://katacoda.com/wey/scenarios/siwi-kgqa
 
 ## How does it work?
 
