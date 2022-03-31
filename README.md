@@ -168,7 +168,7 @@ docker run --rm --name siwi-api \
 
 Try it out Web API:
 ```bash
-$ curl --header "Content-Type: application/json" \
+$ curl -s --header "Content-Type: application/json" \
        --request POST \
        --data '{"question": "What is the relationship between Yao Ming and Lakers?"}' \
        http://192.168.8.128:5000/query | jq
@@ -345,7 +345,7 @@ echo $REVISION
 Verify the function worked fine:
 
 ```bash
-curl --header "Content-Type: application/json" \
+curl -s --header "Content-Type: application/json" \
      --request POST \
      --data '{"question": "What is the relationship between Yao Ming and Lakers ?"}' \
      $(kubectl get ksvc -l openfunction.io/serving=$FUNCTION -o=jsonpath='{.items[0].status.url}')/query
@@ -362,7 +362,7 @@ Verify the function worked fine through the ingress:
 > Here nodeport with http port 31059 was used as ingress controller endpoint.
 
 ```bash
-curl --header "Content-Type: application/json" \
+curl -s --header "Content-Type: application/json" \
      --request POST \
      --data '{"question": "how does Tim Duncan and Lakers connected?"}' \
      demo-siwi.local:31059/query
