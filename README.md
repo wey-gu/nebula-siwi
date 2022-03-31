@@ -138,7 +138,6 @@ Load the [basketballplayer dataset](https://docs.nebula-graph.com.cn/2.6.2/3.ngq
 ```bash
 ~/.nebula-up/console.sh
 wget https://docs.nebula-graph.io/2.0/basketballplayer-2.X.ngql
-nebula-console -addr graphd -port 9669 -user root -p nebula
 nebula-console -addr graphd -port 9669 -user root -p nebula -f basketballplayer-2.X.ngql
 ```
 
