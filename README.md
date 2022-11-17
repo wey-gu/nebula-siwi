@@ -24,7 +24,7 @@ Supported queries:
 
 ## Deploy and Try
 
-You can try with it from scratch here: https://katacoda.com/wey/scenarios/siwi-kgqa
+You can try with it from scratch here: https://siwei.io/learn/nebula-101-siwi-kgqa/
 
 ## How does it work?
 
