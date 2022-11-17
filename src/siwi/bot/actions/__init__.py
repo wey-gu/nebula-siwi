@@ -110,7 +110,7 @@ class RelationshipAction(SiwiActionBase):
     """
     USE basketballplayer;
     FIND NOLOOP PATH
-    FROM "player100" TO "team204" OVER * BIDIRECT UPTO 4 STEPS;
+    FROM "player100" TO "team204" OVER * BIDIRECT UPTO 4 STEPS YIELD path AS p;
     """
     def __init__(self, intent):
         print(f"[DEBUG] RelationshipAction intent: { intent }")
@@ -133,7 +133,7 @@ class RelationshipAction(SiwiActionBase):
             f'USE basketballplayer;'
             f'FIND NOLOOP PATH '
             f'FROM "{self.left_vid}" TO "{self.right_vid}" '
-            f'OVER * BIDIRECT UPTO 4 STEPS;'
+            f'OVER * BIDIRECT UPTO 4 STEPS YIELD path AS p;'
             )
         print(
             f"[DEBUG] query for RelationshipAction :\n\t{ query }"

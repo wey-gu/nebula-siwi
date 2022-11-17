@@ -130,15 +130,14 @@ The backend relis on the [Nebula Graph](https://github.com/vesoft-inc/nebula), a
 Install Nebula Graph in oneliner:
 
 ```bash
-curl -fsSL nebula-up.siwei.io/install.sh | bash -s -- 2.6
+curl -fsSL nebula-up.siwei.io/install.sh | bash
 ```
 
 Load the [basketballplayer dataset](https://docs.nebula-graph.com.cn/2.6.2/3.ngql-guide/1.nGQL-overview/1.overview/#basketballplayer).
 
 ```bash
 ~/.nebula-up/console.sh
-wget https://docs.nebula-graph.io/2.0/basketballplayer-2.X.ngql
-nebula-console -addr graphd -port 9669 -user root -p nebula -f basketballplayer-2.X.ngql
+nebula-console -addr graphd -port 9669 -user root -p nebula -e ":play basketballplayer"
 ```
 
 ### Backend
