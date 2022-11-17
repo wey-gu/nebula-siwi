@@ -26,4 +26,4 @@ RUN pip3 install dist/siwi-*-py3-none-any.whl
 ENV PORT 5000
 ENV NG_ENDPOINTS "127.0.0.1:9669"
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 wsgi
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 1 --timeout 0 wsgi
