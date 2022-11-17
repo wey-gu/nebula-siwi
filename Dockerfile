@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED True
 
 # Install production dependencies.
 RUN apt-get update && apt-get install -y \
-    python3-pip python3.8-venv
+    python3-pip python3-venv
 RUN pip3 install --no-cache-dir Cython
 RUN pip3 install Flask gunicorn nebula3-python pyahocorasick pyyaml build
 
@@ -17,7 +17,7 @@ WORKDIR $APP_HOME
 COPY . ./
 
 RUN python3 -m build
-RUN pip3 install dist/siwi-0.2-py3-none-any.whl
+RUN pip3 install dist/siwi-*-py3-none-any.whl
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
 # For environments with multiple CPU cores, increase the number of workers
