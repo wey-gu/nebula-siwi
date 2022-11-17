@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED True
 RUN apt-get update && apt-get install -y \
     python3-pip python3.8-venv
 RUN pip3 install --no-cache-dir Cython
-RUN pip3 install Flask gunicorn nebula2-python==2.0.0 pyahocorasick pyyaml build
+RUN pip3 install Flask gunicorn nebula3-python pyahocorasick pyyaml build
 
 # Copy local code to the container image.
 ENV APP_HOME /app

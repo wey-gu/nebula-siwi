@@ -181,8 +181,8 @@ $ curl -s --header "Content-Type: application/json" \
 Call Bot Python API:
 
 ```python
-from nebula2.gclient.net import ConnectionPool
-from nebula2.Config import Config
+from nebula3.gclient.net import ConnectionPool
+from nebula3.Config import Config
 
 # define a config
 config = Config()

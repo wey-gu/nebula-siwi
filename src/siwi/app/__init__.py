@@ -1,8 +1,8 @@
 import os
 
 from flask import Flask, jsonify, request
-from nebula2.gclient.net import ConnectionPool
-from nebula2.Config import Config
+from nebula3.gclient.net import ConnectionPool
+from nebula3.Config import Config
 from siwi.bot import bot
 
 

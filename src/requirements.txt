@@ -1,4 +1,4 @@
-nebula2-python==2.0.0
+nebula3-python
 Flask==1.1.1
 pyahocorasick==1.4.2
 click==7.1.2
